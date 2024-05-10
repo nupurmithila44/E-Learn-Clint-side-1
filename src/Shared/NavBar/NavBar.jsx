@@ -4,7 +4,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
-  const {user} = useContext(AuthContext);
+  const {user, logOut} = useContext(AuthContext);
   console.log(user)
 
     return (
@@ -20,13 +20,19 @@ const NavBar = () => {
           <li>
             <Link to='/'>Home</Link>
           </li>
-
           <li>
             <Link to='/login'>Login</Link>
           </li>
+{/* 
+         {
+          !user && (
+        
+          )
+         } */}
         </ul>
 
-        x b<div className='dropdown dropdown-end z-50'>
+        {
+          user && <div className='dropdown dropdown-end z-50'>
           <div
             tabIndex={0}
             role='button'
@@ -36,7 +42,7 @@ const NavBar = () => {
               <img
                 referrerPolicy='no-referrer'
                 alt='User Profile Photo'
-                src=''
+                src={user ?. photoURL}
               />
             </div>
           </div>
@@ -51,10 +57,11 @@ const NavBar = () => {
               <div>My Assignment</div>
             </li>
             <li className='mt-2'>
-              <button className='bg-gray-200 block text-center'>Logout</button>
+              <button onClick={logOut} className='bg-gray-200 block text-center'>Logout</button>
             </li>
           </ul>
         </div>
+        }
       </div>
     </div>
     );

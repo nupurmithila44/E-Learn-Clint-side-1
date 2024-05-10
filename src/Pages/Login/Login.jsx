@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import login from "../../assets/logg.jpg"
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
@@ -7,9 +7,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
+
 const Login = () => {
-    const {singInUser} =useContext(AuthContext);
+    const {singInUser, googleLogin, setUser} =useContext(AuthContext);
     console.log(singInUser)
+    // const navigate = useNavigate()
+    // const location = useLocation()
+    const navigate =useNavigate()
 
     const handleLogin = e => {
         e.preventDefault()
@@ -29,24 +33,21 @@ const Login = () => {
         singInUser(email, password)
         .then(result =>{
             console.log(result)
+            // Navigate(location?.state ? location?.state : '/')
             toast.success('sign in successfully')
+            navigate('/')
+           
         })
         .catch(error=>[
             console.error(error)
         ])
-        // singInUser(email, password)
-        //     .then(result => {
-        //         console.log(result)
-        //         // const loggedInUser = result.user;
-        //         // console.log(loggedInUser)
-        //         // navigata(location?.state ? location?.state : '/')
-        //     })
-        //     .catch(error => {
-        //         console.error(error)
-        //     })
-
-
-
+    }
+    const handleGoogleLogin = () =>{
+        googleLogin()
+        .then(result =>{
+            setUser(result.user)
+            navigate(location?.state ? location?.state : "/")
+        })
     }
     return (
         <div className="hero min-h-screen bg-base-200 ">
@@ -56,7 +57,7 @@ const Login = () => {
                 </div>
                 <div className="card shrink-0 w-full max-w-sm shadow-2xl py-4 lg:mr-16 bg-base-100">
                     <h1 className="text-2xl text-center font-bold text-[#ff724f]">WelCome to Login</h1>
-                    <div className='flex cursor-pointer items-center justify-center mt-4 mx-5 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50 '>
+                    <div onClick={handleGoogleLogin} className='flex cursor-pointer items-center justify-center mt-4 mx-5 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50 '>
                         <div className='px-4 py-2'>
                             <svg className='w-6 h-6' viewBox='0 0 40 40'>
                                 <path
