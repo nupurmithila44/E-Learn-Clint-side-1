@@ -23,18 +23,22 @@ const Register = () => {
         .then( result =>{
             console.log(result.user)
             toast('your register successfully')
+            navigate('/login')
+            
     
-            logOut()
-            .then(()=>{
-                navigate('/login')
-            })
+            // logOut()
+            // .then(()=>{
+            //     navigate('/login')
+            // })
     
             updateProfile(auth.currentUser, {
                 displayName: name,
                 photoURL: photo
             })
+           
             .then(result =>{
                 console.log(result.user)
+                
             })
             .catch(error =>{
                 console.log(error)

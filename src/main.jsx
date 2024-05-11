@@ -11,6 +11,8 @@ import Home from './Pages/Home/Home/Home';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
 import { ToastContainer} from 'react-toastify';
+import CreateAssign from './Pages/CreateAssign/CreateAssign';
+import AssignmentPage from './Pages/AssignmentPage/AssignmentPage';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,15 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register></Register>
+      },
+      {
+        path:'/CreateAssign',
+        element: <CreateAssign></CreateAssign>
+      },
+      {
+        path: '/assignPage',
+        element: <AssignmentPage></AssignmentPage>,
+        loader: () => fetch('http://localhost:5000/assignments')
       }
     ]
   },
