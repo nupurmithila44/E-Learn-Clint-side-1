@@ -1,6 +1,6 @@
-import { set } from "firebase/database";
+
 import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
 
@@ -60,8 +60,8 @@ const AssignmentPage = () => {
                                 <p className="font-bold">Mark: {assignment.mark}</p>
                             </div>
                             <div className="card-actions">
-                                <button className="btn btn-success"> view </button>
-                                <button className="btn btn-success"> update </button>
+                                <Link to={`/view/${assignment._id}`}><button  className="btn btn-success"> view </button></Link>
+                                <Link to={`/updateAssign/${assignment._id}`}><button className="btn btn-success"> update </button></Link>
                                 <button
                                     onClick={() => handleDelete(assignment._id)}
                                     className="btn btn-error">delete</button>

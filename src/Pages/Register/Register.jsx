@@ -8,7 +8,7 @@ import auth from "../../Firebase/Firebase.confiq";
 
 
 const Register = () => {
-    const { registerUser,logOut, user, setUser } = useContext(AuthContext)
+    const { registerUser,logOut } = useContext(AuthContext)
     const navigate = useNavigate()
     console.log(registerUser)
     const handleSignIn = e => {
@@ -26,10 +26,10 @@ const Register = () => {
             navigate('/login')
             
     
-            // logOut()
-            // .then(()=>{
-            //     navigate('/login')
-            // })
+            logOut()
+            .then(()=>{
+                navigate('/login')
+            })
     
             updateProfile(auth.currentUser, {
                 displayName: name,

@@ -13,6 +13,8 @@ import Register from './Pages/Register/Register';
 import { ToastContainer} from 'react-toastify';
 import CreateAssign from './Pages/CreateAssign/CreateAssign';
 import AssignmentPage from './Pages/AssignmentPage/AssignmentPage';
+import UpdateAssign from './Pages/AssignmentPage/UpdateAssign';
+import VeiwDetails from './Pages/AssignmentPage/VeiwDetails';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,17 @@ const router = createBrowserRouter([
       {
         path: '/assignPage',
         element: <AssignmentPage></AssignmentPage>,
+        loader: () => fetch('http://localhost:5000/assignments')
+      },
+      {
+        path:'/updateAssign/:id',
+        element: <UpdateAssign></UpdateAssign>,
+        loader:({params}) => fetch(`http://localhost:5000/assignments/${params.id}`)
+        
+      },
+      {
+        path: '/view/:id',
+        element:<VeiwDetails></VeiwDetails>,
         loader: () => fetch('http://localhost:5000/assignments')
       }
     ]
