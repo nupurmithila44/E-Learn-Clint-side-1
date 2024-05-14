@@ -1,14 +1,19 @@
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 
 const AssignmentPage = () => {
     const assignmentPage = useLoaderData()
+    const {user}=useContext(AuthContext)
     const [assignPage, setAssignPage]= useState(assignmentPage)
     console.log(assignmentPage)
     const handleDelete = _id => {
+        if(!user){
+            return alert('sorry')
+        }
         console.log(_id)
         Swal.fire({
             title: "Are you sure?",

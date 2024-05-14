@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, GithubAuthProvider } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/Firebase.confiq";
+import axios from "axios";
 
 // social Auth 
 const googleProvider = new GoogleAuthProvider()
@@ -44,8 +45,27 @@ const logOut = ()=>{
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (curentUser) => {
+            const userEmail = curentUser?.email || user?.email;
+            const loggedUser = {email: userEmail};
            setUser(curentUser)
            setloader(false)
+        //    if user exists then issue a token
+        if(curentUser){   
+            axios.post('http://localhost:5000/jwt', loggedUser, {withCredentials:true})
+            .then(res=> {
+                console.log('token', res.data);
+            })
+
+        }
+        else{
+            axios.post('http://localhost:5000/logOut',loggedUser, {
+                withCredentials:true
+            })
+            .then(res =>{
+                console.log(res.data);
+            })
+        }
+
            
         });
         return () => {

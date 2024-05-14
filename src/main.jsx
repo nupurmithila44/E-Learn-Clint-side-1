@@ -15,6 +15,10 @@ import CreateAssign from './Pages/CreateAssign/CreateAssign';
 import AssignmentPage from './Pages/AssignmentPage/AssignmentPage';
 import UpdateAssign from './Pages/AssignmentPage/UpdateAssign';
 import VeiwDetails from './Pages/AssignmentPage/VeiwDetails';
+import SubmissionFrom from './Pages/AssignmentPage/SubmissionFrom';
+import PrivateRoutes from './PrivateRoutes/PrivateRoutes';
+import PandingPage from './Pages/PandingPage/PandingPage';
+import GiveMarkPage from './Pages/PandingPage/GiveMarkPage';
 
 const router = createBrowserRouter([
   {
@@ -35,7 +39,9 @@ const router = createBrowserRouter([
       },
       {
         path:'/CreateAssign',
-        element: <CreateAssign></CreateAssign>
+        element: <PrivateRoutes>
+          <CreateAssign></CreateAssign>
+        </PrivateRoutes>
       },
       {
         path: '/assignPage',
@@ -52,6 +58,23 @@ const router = createBrowserRouter([
         path: '/view/:id',
         element:<VeiwDetails></VeiwDetails>,
         loader: () => fetch('http://localhost:5000/assignments')
+      },
+      {
+        path: '/mySubmitted',
+        element: <PrivateRoutes>
+          <SubmissionFrom></SubmissionFrom>
+        </PrivateRoutes>
+      },
+      {
+        path: '/pendingPage',
+        element: <PandingPage></PandingPage>,
+        loader: () => fetch('http://localhost:5000/data')
+      },
+      {
+        path: '/giveMark/:id',
+        element:<GiveMarkPage></GiveMarkPage>,
+        loader: ({params}) => fetch(`http://localhost:5000/data/${params.id}`)
+       
       }
     ]
   },

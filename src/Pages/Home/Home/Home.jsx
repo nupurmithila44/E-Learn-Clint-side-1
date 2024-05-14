@@ -1,12 +1,17 @@
 
 import Carosol from "./Carosol";
+import FaqSec from "./FaqSec";
+import FewCard from "./FewCard";
 
 
 const Home = () => {
     return (
         <div>
             <Carosol></Carosol>
-            <h1>this is home</h1>
+            <FewCard></FewCard>
+            <FaqSec></FaqSec>
+           
+        
         </div>
     );
 };

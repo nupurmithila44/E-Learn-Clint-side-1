@@ -48,24 +48,15 @@ const NavBar = () => {
           <li>
             <Link to='/assignPage'>Assignment page</Link>
           </li>
-          {
-            user ? "" : <>  <li>
-              <Link to='/register'>Register</Link>
-            </li>
-              <li>
-                <Link to='/login'>Login</Link>
-              </li></>
-          }
-          {/* 
-         {
-          !user && (
-        
-          )
-         } */}
+          <li>
+            <Link to='/pendingPage'>Pending Assignments</Link>
+          </li>
+          <li>
+            <Link to='/register'>Register</Link>
+          </li>
         </ul>
-
         {
-          user && <div className='dropdown dropdown-end z-50'>
+          user?.email ? <div className='dropdown dropdown-end z-50'>
             <div
               tabIndex={0}
               role='button'
@@ -86,14 +77,18 @@ const NavBar = () => {
               <li>
                 <div className='justify-between'>Add Job</div>
               </li>
-              <li>
-                <div>My Assignment</div>
-              </li>
+              <li><Link to='/mySubmitted'>My Submitted</Link></li>
               <li className='mt-2'>
-                <button onClick={logOut} className='bg-gray-200 block text-center'>Logout</button>
+                <button onClick={handleLogOut} className='bg-gray-200 block text-center'>Logout</button>
               </li>
             </ul>
-          </div>
+          </div> :
+            <ul>
+              <li>
+                <Link to='/login'>Login</Link>
+              </li>
+
+            </ul>
         }
       </div>
       {/* theme  */}

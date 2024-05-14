@@ -1,11 +1,13 @@
 import { Link, useLoaderData, useParams } from "react-router-dom";
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 
 const VeiwDetails = () => {
     const viewLoader = useLoaderData()
+    const { user } = useContext(AuthContext)
     console.log(viewLoader)
     const { id } = useParams()
     const details = viewLoader.find(view => view._id == id)
@@ -21,8 +23,39 @@ const VeiwDetails = () => {
         const form = e.target;
         const pdf = form.pdf.value;
         const note = form.note.value;
-        console.log(pdf, note);
+        const userEmail = user.email;
+
+        const assignments = {
+            assignTitle: title,
+            assignment_mark: mark,
+            pdf,
+            note,
+            userEmail,
+            obtained_marks: 'pending',
+            status: 'pending',
+            feedback: 'pending'
+
+
+        }
+        // console.log(assignment);
+        fetch('http://localhost:5000/data', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(assignments)
+
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.insertedId) {
+                    alert('checkOut success fully')
+                }
+            })
     }
+
+
 
 
     return (
