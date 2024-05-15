@@ -51,14 +51,14 @@ const logOut = ()=>{
            setloader(false)
         //    if user exists then issue a token
         if(curentUser){   
-            axios.post('http://localhost:5000/jwt', loggedUser, {withCredentials:true})
+            axios.post('https://e-learn-server-side.vercel.app/jwt', loggedUser, {withCredentials:true})
             .then(res=> {
                 console.log('token', res.data);
             })
 
         }
         else{
-            axios.post('http://localhost:5000/logOut',loggedUser, {
+            axios.post('https://e-learn-server-side.vercel.app/logOut',loggedUser, {
                 withCredentials:true
             })
             .then(res =>{

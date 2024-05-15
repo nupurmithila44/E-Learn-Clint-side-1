@@ -6,7 +6,7 @@ const SubmissionFrom = () => {
   const {user}= useContext(AuthContext)
 const [mysubmit, setMysubmit]=useState([])
 
-  const url = `http://localhost:5000/data?userEmail=${user?.email}`;
+  const url = `https://e-learn-server-side.vercel.app/data?userEmail=${user?.email}`;
   useEffect(() =>{
     fetch(url, {credentials: "include"})
     .then(res=> res.json())

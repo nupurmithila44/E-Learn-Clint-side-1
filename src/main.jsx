@@ -18,12 +18,14 @@ import VeiwDetails from './Pages/AssignmentPage/VeiwDetails';
 import SubmissionFrom from './Pages/AssignmentPage/SubmissionFrom';
 import PrivateRoutes from './PrivateRoutes/PrivateRoutes';
 import PandingPage from './Pages/PandingPage/PandingPage';
-import GiveMarkPage from './Pages/PandingPage/GiveMarkPage';
+import ErrorPage from './Pages/ErrorPage';
+
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement:<ErrorPage></ErrorPage>,
     children:[
       {
         path: '/',
@@ -46,18 +48,18 @@ const router = createBrowserRouter([
       {
         path: '/assignPage',
         element: <AssignmentPage></AssignmentPage>,
-        loader: () => fetch('http://localhost:5000/assignments')
+        loader: () => fetch('https://e-learn-server-side.vercel.app/assignments')
       },
       {
         path:'/updateAssign/:id',
         element: <UpdateAssign></UpdateAssign>,
-        loader:({params}) => fetch(`http://localhost:5000/assignments/${params.id}`)
+        loader:({params}) => fetch(`https://e-learn-server-side.vercel.app/assignments/${params.id}`)
         
       },
       {
         path: '/view/:id',
         element:<VeiwDetails></VeiwDetails>,
-        loader: () => fetch('http://localhost:5000/assignments')
+        loader: () => fetch('https://e-learn-server-side.vercel.app/assignments')
       },
       {
         path: '/mySubmitted',
@@ -68,14 +70,15 @@ const router = createBrowserRouter([
       {
         path: '/pendingPage',
         element: <PandingPage></PandingPage>,
-        loader: () => fetch('http://localhost:5000/data')
+        loader: () => fetch('https://e-learn-server-side.vercel.app/data')
       },
-      {
-        path: '/giveMark/:id',
-        element:<GiveMarkPage></GiveMarkPage>,
-        loader: ({params}) => fetch(`http://localhost:5000/data/${params.id}`)
+    
+      // {
+      //   path: '/giveMark/:id',
+      //   element:<GiveMarkPage></GiveMarkPage>,
+      //   loader: ({params}) => fetch(`https://e-learn-server-side.vercel.app/data/${params.id}`)
        
-      }
+      // }
     ]
   },
 ]);

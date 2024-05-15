@@ -1,17 +1,20 @@
 
 import { useContext, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import 'react-tabs/style/react-tabs.css'
+import AssainmentCard from "../Assainment/AssainmentCard";
 
 
 const AssignmentPage = () => {
     const assignmentPage = useLoaderData()
-    const {user}=useContext(AuthContext)
-    const [assignPage, setAssignPage]= useState(assignmentPage)
+    const { user } = useContext(AuthContext)
+    const [assignPage, setAssignPage] = useState(assignmentPage)
     console.log(assignmentPage)
     const handleDelete = _id => {
-        if(!user){
+        if (!user) {
             return alert('sorry')
         }
         console.log(_id)
@@ -26,7 +29,7 @@ const AssignmentPage = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 console.log('delete confirmd')
-                fetch(`http://localhost:5000/assignments/${_id}`, {
+                fetch(`https://e-learn-server-side.vercel.app/assignments/${_id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())
@@ -38,44 +41,60 @@ const AssignmentPage = () => {
                                 text: "Your file has been deleted.",
                                 icon: "success"
                             });
-                           const remaining = assignPage.filter(assign => assign._id !== _id)
-                           setAssignPage(remaining)
-                          
+                            const remaining = assignPage.filter(assign => assign._id !== _id)
+                            setAssignPage(remaining)
+
                         }
                     })
             }
         });
     }
     return (
-        <div>
-            <h1 className="text-4xl font-bold text-center mt-10">Online Group-Study <br /> assignment</h1>
+        <Tabs>
+            <div className=' container px-6 py-10 mx-auto'>
+               
 
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mt-3'>
-                {
-                    assignPage.map(assignment => <div key={assignment._id} className="card w-96 bg-base-100 shadow-xl">
-                        <figure className="px-10 pt-10">
-                            <img src={assignment.photo} alt="Shoes" className="rounded-xl" />
-                        </figure>
-                        <div className="card-body ">
-                            <h2 className="card-title">{assignment.title}</h2>
-                            <p>{assignment.description}</p>
-                            <p className="text-bold text-sm text-green-500">Difficulty Level: {assignment.assign}</p>
-                            <div className="flex justify-between">
-                                <p className="font-bold">Date Posted : {assignment.date}</p>
-                                <p className="font-bold">Mark: {assignment.mark}</p>
-                            </div>
-                            <div className="card-actions">
-                                <Link to={`/view/${assignment._id}`}><button  className="btn btn-success"> view </button></Link>
-                                <Link to={`/updateAssign/${assignment._id}`}><button className="btn btn-success"> update </button></Link>
-                                <button
-                                    onClick={() => handleDelete(assignment._id)}
-                                    className="btn btn-error">delete</button>
-                            </div>
-                        </div>
-                    </div>)
-                }
+                <h1 className="text-4xl font-bold text-center mt-10">Online Group-Study <br /> assignment</h1>
+                
+                <div className='flex items-center justify-center mt-5 text-2xl'>
+                    
+                    <TabList>
+                        <Tab>Hard</Tab>
+                        <Tab>Medium</Tab>
+                        <Tab>Easy</Tab>
+                    </TabList>
+                </div>
+                <TabPanel>
+                    <div className='grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+                        {assignPage
+                            .filter(j => j.assign === 'easy')
+                            .map(assignment => (
+                                <AssainmentCard key={assignment._id} assignment={assignment} handleDelete={handleDelete}></AssainmentCard>                             
+                            ))}
+                    </div>
+                </TabPanel>
+
+                <TabPanel>
+                    <div className='grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+                        {assignPage
+                            .filter(j => j.assign === 'medium')
+                            .map(assignment => (
+                                <AssainmentCard key={assignment._id} assignment={assignment} handleDelete={handleDelete}></AssainmentCard>                             
+                            ))}
+                    </div>
+                </TabPanel>
+
+                <TabPanel>
+                    <div className='grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+                        {assignPage
+                            .filter(j => j.assign === 'hard')
+                            .map(assignment => (
+                                <AssainmentCard key={assignment._id} assignment={assignment} handleDelete={handleDelete}></AssainmentCard>                             
+                            ))}
+                    </div>
+                </TabPanel>
             </div>
-        </div>
+        </Tabs>
     );
 };
 

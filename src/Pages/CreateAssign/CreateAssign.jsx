@@ -1,12 +1,18 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 
 const CreateAssign = () => {
+    const [startDate, setStartDate] = useState(new Date());
+
     const handleAddTourism = event => {
         event.preventDefault()
         const form = event.target
-        const date = form.date.value;
+        const date = startDate;
         const title = form.title.value;
         const description = form.description.value;
         const assign = form.assignDifficulty.value;
@@ -16,7 +22,7 @@ const CreateAssign = () => {
         console.log(createAssign)
 
     //    send to the server
-      fetch('http://localhost:5000/assignments',{
+      fetch('https://e-learn-server-side.vercel.app/assignments',{
         method: 'POST',
         headers:{
             'content-type': 'application/json'
@@ -38,17 +44,17 @@ const CreateAssign = () => {
        
     }
     return (
-       <div className="w-[500px] mx-auto mb-6"> 
+       <div className="my-10"> 
          <div className="">
-            <Link to='/'><button className=" rounded-md text-center">...Back </button></Link>
-           <h1 className="text-2xl font-bold">Create Assignment</h1>
-            <div className=" mr-24 p-20 bg-gray-200 w-[700px]  mx-auto mt-4 border-blue-600 " >   
+            <Link to='/'><button className="rounded-md text-center mx-5">...Back </button></Link>
+           <h1 className="text-2xl text-center font-bold">Create Assignment</h1>
+            <div className="px-2 py-2  bg-gray-200 lg:w-[700px] w-[300px]  mx-auto mt-4 border-blue-600 " >   
                 <form onSubmit={handleAddTourism} >
                 <div className="form-control">
                             <label className="label">
                                 <span className="text-xl">Date:</span>
                             </label>
-                            <input type="date" name="date" placeholder="date" className="input input-bordered w-[300px]" required />
+                            <DatePicker className="input input-bordered w-full" selected={startDate} onChange={(date) => setStartDate(date)} />
                         </div>
                     <div className="">
                             <label className="label">

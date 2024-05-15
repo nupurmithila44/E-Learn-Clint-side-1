@@ -1,8 +1,15 @@
-# React + Vite
+# B9 A11 Type-01 Requirements
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# My website featured
+1. Dynamic page.
+2. data load to mongodb.
+3. login & register system.
+4. add learn online.
+5. My Submitted page.
 
-Currently, two official plugins are available:
+# npm package 
+1. sweet alert.
+2. React toastify.
+3. React icons.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [https://e-learn-online.netlify.app/](https://e-learn-online.netlify.app/) 

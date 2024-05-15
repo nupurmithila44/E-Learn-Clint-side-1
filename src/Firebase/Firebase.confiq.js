@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyD6ABXKW5UHvc-Kc5vCMX0ONS2Jw2bypaw",
-  authDomain: "e-learn-online.firebaseapp.com",
-  projectId: "e-learn-online",
-  storageBucket: "e-learn-online.appspot.com",
-  messagingSenderId: "1040116142552",
-  appId: "1:1040116142552:web:31af0617b7a28160fd62ad"
+   apiKey: import.meta.env.VITE_apiKey,
+  authDomain:import.meta.env.VITE_authDomain,
+  projectId:import.meta.env.VITE_projectId,
+  storageBucket:import.meta.env.VITE_storageBucket,
+  messagingSenderId:import.meta.env.VITE_messagingSenderId,
+  appId:import.meta.env.VITE_appId
 };
 
 // Initialize Firebase

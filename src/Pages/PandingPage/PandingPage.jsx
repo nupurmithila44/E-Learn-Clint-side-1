@@ -1,20 +1,23 @@
-import { useContext} from "react";
+import { useContext, useState} from "react";
 import {  Link, useLoaderData} from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 
-// import 'react-responsive-modal/styles.css';
-// import Modal from "react-responsive-modal";
+import 'react-responsive-modal/styles.css';
+import Modal from "react-responsive-modal";
 
 
 const PandingPage = () => {
-    const {user}=useContext(AuthContext)
-    // console.log(user)
     const pendingLoadar = useLoaderData()
+    console.log(pendingLoadar)
+    const {user}=useContext(AuthContext)
+    console.log(user)
+   
     
 
-    // const [open, setOpen] = useState(false);
-    // const onOpenModal = () => setOpen(true);
-    // const onCloseModal = () => setOpen(false); 
+    const [open, setOpen] = useState(false);
+    const onOpenModal = () => setOpen(true);
+    const onCloseModal = () => setOpen(false); 
+
 
 
 
@@ -29,8 +32,8 @@ const PandingPage = () => {
                 <p>Full Mark <span>{pendingLo.assignment_mark}</span></p>
                 <p>Examiner Name: <span>{user?.displayName}</span></p>
                 <div>
-             <Link to={`/giveMark/${pendingLo._id}`} ><button  className="btn bg-[#ff724f]">Give Mark</button></Link>
-            {/* <Modal open={open} onClose={onCloseModal} center>
+             <Link  ><button onClick={onOpenModal} className="btn bg-[#ff724f]">Give Mark</button></Link>
+            <Modal open={open} onClose={onCloseModal} center>
         <div className="my-5 w-[500px]">
             <h1 className="text-3xl font-bold text-center">Give Mark here</h1>
             <p>Pdf Link : <span>{pendingLo.pdf}</span></p>
@@ -38,7 +41,7 @@ const PandingPage = () => {
             <p>Give Mark : <span>{pendingLo.assignment_mark}</span></p>
             <form  className="space-y-3">
                 <div>
-                    <input type="text" name="GiveMark" placeholder="Give mark" className="w-full p-3 border-2" />
+                    <input type="text" name="giveMark" defaultValue={pendingLo.obtained_marks} placeholder="Give mark" className="w-full p-3 border-2" />
                 </div>
                 <div>
                     <label htmlFor="">Write Feedback</label>
@@ -47,7 +50,7 @@ const PandingPage = () => {
                 <button className="btn btn-primary">Submit</button>
             </form>
         </div>
-    </Modal> */}
+    </Modal>
         </div>
               </div>)
             }

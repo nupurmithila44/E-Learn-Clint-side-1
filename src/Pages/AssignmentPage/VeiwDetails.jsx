@@ -3,6 +3,8 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const VeiwDetails = () => {
@@ -12,7 +14,7 @@ const VeiwDetails = () => {
     const { id } = useParams()
     const details = viewLoader.find(view => view._id == id)
     console.log(details)
-    const { _id, assign, date, description, mark, photo, title } = details;
+    const { assign, date, description, mark, photo, title } = details;
     const [open, setOpen] = useState(false);
 
     const onOpenModal = () => setOpen(true);
@@ -38,7 +40,7 @@ const VeiwDetails = () => {
 
         }
         // console.log(assignment);
-        fetch('http://localhost:5000/data', {
+        fetch('https://e-learn-server-side.vercel.app/data', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -50,7 +52,7 @@ const VeiwDetails = () => {
             .then(data => {
                 console.log(data)
                 if (data.insertedId) {
-                    alert('checkOut success fully')
+                    toast('Submitted Assignment')
                 }
             })
     }

@@ -1,6 +1,4 @@
 
-
-
 const Slide = ({image, text}) => {
     return (
         <div

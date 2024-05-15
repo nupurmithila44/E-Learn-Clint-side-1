@@ -4,8 +4,10 @@ const FaqSec = () => {
     return (
         <div>
             <div>
-            <h1 className="lg:text-4xl font-bold text-center mt-20 mb-7">our Best Features</h1>
-            <p className="text-xl font-semibold lg:mx-56 ">Here’s an example of the use of “why” instead of offering a yes/no question. People will wonder what online learning can do for them and rather than telling them whether or not they can benefit, you’re explaining how everyone can benefit from online learning when they do it properly</p>
+                <h1 className="lg:text-4xl font-bold text-center mt-20 mb-7">our Best Features</h1>
+                <div className="w-[300px] lg:w-[700px] mx-auto">
+                    <p className="text-base font-semibold ">Here’s an example of the use of “why” instead of offering a yes/no question. People will wonder what online learning can do for them and rather than telling them whether or not they can benefit, you’re explaining how everyone can benefit from online learning when they do it properly</p>
+                </div>
                 <section className="dark:bg-gray-100 dark:text-gray-800 px-7 my-10">
                     <div className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8">
                         <h2 className="text-2xl font-extrabold sm:text-4xl ">What is online learning like?</h2>

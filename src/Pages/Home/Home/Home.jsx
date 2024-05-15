@@ -10,8 +10,6 @@ const Home = () => {
             <Carosol></Carosol>
             <FewCard></FewCard>
             <FaqSec></FaqSec>
-           
-        
         </div>
     );
 };
